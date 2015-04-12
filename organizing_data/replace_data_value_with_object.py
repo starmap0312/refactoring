@@ -9,7 +9,11 @@ class Order(object):
     # use simple data type, i.e. string
 
     def __init__(self, customerName):
+<<<<<<< HEAD
         # starts with a data item(string)
+=======
+        # starts with a data item
+>>>>>>> 22ceaa0ad265a9d2847766c683d39f7d39d95c93
         self._customer = customerName
 
     def getCustomerName(self):
