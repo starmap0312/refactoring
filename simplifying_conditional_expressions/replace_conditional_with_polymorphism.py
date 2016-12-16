@@ -31,7 +31,7 @@ class Employee(object):
     def getBonus(self):
         return self._bonus
 
-    def payAmount(self):
+    def payAmount(self): # exhibit different behaviors based on different type codes
         # the switch statement may appear in many places, the type code related behaviors are
         # mixed with the client class here
         if self._type == Employee.ENGINEER:
@@ -69,7 +69,7 @@ class Employee(object):
     def getBonus(self):
         return self._bonus
 
-    def payAmount(self):
+    def payAmount(self): # exhibit the same behavior by delegating to type classes
         # the switch statement is replaced by delegation to different type code objects
         return self._type.payAmount(self)
 

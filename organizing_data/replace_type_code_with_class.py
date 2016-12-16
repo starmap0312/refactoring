@@ -38,60 +38,56 @@ class Person(object):
         # self._bloodGroup can be set to arbitrary constant, not forced to (0, 1, 2, 3)
         self._bloodCode = bloodCode
 
-    def getBloodCode(self):
+    def getCode(self):
         return self._bloodCode
 
 person = Person(Person.A)
 # person = Person(2) # no type checks
-print person.getBloodCode()
+print person.getCode()
 
 # after: create a new class for the type code
-class BloodType(object):
 
-    def __init__(self, code):
-        self._code = code
+class Person(object):
 
-    def getCode(self):
-        return self._code
+    def __init__(self, bloodType):
+        self.bloodType = bloodType
 
-class BloodGroup(object):
-    # create a new class for the type code, i.e. a new blood group class with instances 
-    # containing the type code number, thus can add type-code related behaviors here
-    (O, A, B, AB) = (BloodType(0), BloodType(1), BloodType(2), BloodType(3))
-    # type codes are fixed, all type-code objects share the same behavior; use subclassing to
-    # allow different behaviors in different type-code objects
-    _values = [O, A, B, AB]
-
-    @staticmethod
-    def create(code):
-        # a factory method for constructing type-code objects
-        # if arg not in (0, 1, 2, 3), then an exception will be raised
-        # therefore, there will be run-time checking within the blood group class
-        return BloodGroup._values[code]
-
-class NewPerson(object):
-    # replace the code in Person with code that uses the new class, BloodGroup
-
-    def __init__(self, bloodGroup):
-        self._bloodGroup = bloodGroup
-
-    def setBloodGroup(self, bloodGroup):
-        self._bloodGroup = bloodGroup
-
-    def getBloodGroup(self):
-        return self._bloodGroup
+    def setBloodType(self, bloodType):
+        self.bloodType = bloodType
 
     def getBloodType(self):
-        return self._bloodGroup.getCode()
+        return bloodType
 
-newperson = NewPerson(BloodGroup.A)
-#newperson = NewPerson(2) # fail, because there are type checks
-#print newperson.getBloodGroup().getCode()
-print newperson.getBloodType()
+class BloodType(object):
 
-bloodGroup = BloodGroup.create(2)
-newperson = NewPerson(bloodGroup)
-print newperson.getBloodType()
+  def __init__(self, code):
+      self.code = code;
+
+  def getCode(self):
+    return self.code
+
+  @staticmethod
+  def O():
+    return BloodType(0)
+
+  @staticmethod
+  def A():
+    return BloodType(1)
+
+  @staticmethod
+  def B():
+    return BloodType(2)
+
+  @staticmethod
+  def AB():
+    return BloodType(0)
+
+# client code
+parent = Person(BloodType.O())
+if parent.getBloodType().getCode() == BloodType.AB().getCode():
+    pass # ...
+
+child.setBloodType(parent.getBloodType())
 
 # another example
 class EmployeeType(object):
