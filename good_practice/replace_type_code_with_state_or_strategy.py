@@ -45,21 +45,8 @@ class EmployeeType(object):
         else:
             raise Exception('Incorrect Employee Type')
 
-class Employee(object):
-    # client class HAS_A type-class object (state/strategy)
-    (ENGINEER, SALESMAN, MANAGER) = (Engineer(), Salesman(), Manager())
-
-    def __init__(self, type):
-        self._type = type
-
-    def getCode(self):
-        return self._type.getCode()
-
-    def payAmount(self):
-        return self._type.payAmount()
-
 class Engineer(EmployeeType):
-    # type subclass
+    # type-code subclass
 
     def __init__(self):
         super(Engineer, self).__init__()
@@ -85,6 +72,19 @@ class Manager(EmployeeType):
 
     def payAmount(self):
         return self._monthlySalary + self._bonus
+
+class Employee(object):
+    # client class HAS_A type-code subclass object (state/strategy)
+    (ENGINEER, SALESMAN, MANAGER) = (Engineer(), Salesman(), Manager())
+
+    def __init__(self, type):
+        self._type = type
+
+    def getCode(self):
+        return self._type.getCode()
+
+    def payAmount(self):
+        return self._type.payAmount()
 
 # client
 employee = Employee(Employee.ENGINEER)
