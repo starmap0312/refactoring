@@ -32,6 +32,8 @@ class ExtendedDate(Date):
 
 mydate = ExtendedDate(2015, 4, 1)
 print mydate.getNextDay()
+# bad design: we program to implementation, not interface
+#             ExtendedDate and Date are tightly coupled 
 
 # 2) use decoration (wrapping)
 class ExtendedDate(object):
@@ -55,12 +57,5 @@ class ExtendedDate(object):
 
 mydate = ExtendedDate(Date(2014, 4, 1))
 print mydate.getNextDay()
-
-# 3) use foreign method
-def getNextDay(date):
-    # the original object is passed in as the first parameter
-    return '%s/%s/%s' % (date.getYear(), date.getMonth(), date.getDate()+1)
-
-print getNextDay(Date(2014, 4, 1))
-
-
+# good design: we program to interface, not implementation
+#              ExtendedDate and Date are loosely coupled
