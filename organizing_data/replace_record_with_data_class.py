@@ -1,12 +1,12 @@
 # - to interface with a record structure, ex. database record
 #   create an interfacing class to deal with the external element, ex. database record
-# - create a dum data object without any behavior, extra behaviors will be added or move in later
+# - create a dummy data object without any behavior, extra behaviors will be added or move in later
 
 # DB columns: Name, Age, Gender, Job
 record = ['Bob', 32, 'Male', 'Engineer']
 
 class Record(object):
-    # a data class, behaviors will added later during development
+    # a dumb class, behaviors will added later during development
 
     def __init__(self, name, age, gender, job):
         self.name = name

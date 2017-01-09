@@ -59,3 +59,4 @@ mydate = ExtendedDate(Date(2014, 4, 1))
 print mydate.getNextDay()
 # good design: we program to interface, not implementation
 #              ExtendedDate and Date are loosely coupled
+# drawback: code duplication and code complexity

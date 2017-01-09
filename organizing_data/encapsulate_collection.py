@@ -13,7 +13,7 @@
 #   to its clients: eaiser to extend because of the less coupling
 
 # exmaple: encapsulating sets
-# before
+# (before)
 class Course(object):
 
     def __init__(self, name, isAdvanced):
@@ -48,7 +48,7 @@ courses.add(Course('Machine Learning', True))
 for course in kent.getCourse():
     print course.getName(), course.isAdvanced()
 
-# after: encapsulate collection
+# (after) encapsulate collection
 
 class NewPerson(object):
     # make the collection object read-only and provide add/remove methods(getter/setter)

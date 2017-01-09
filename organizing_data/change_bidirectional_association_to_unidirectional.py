@@ -4,7 +4,7 @@
 #   maintaining the two-way links(the interdependeny: a change of either one affects the other)
 # - two-way links could be a source of errors: can lead to zombies(an object still hangs around
 #   because of a reference not cleared)
-# - if the two classes are in two separate packages, you get an interdependency betwenn two
+# - if the two classes are in two separate packages, you get an interdependency between two
 #   packages(a change to one package may cause a change to the other)
 # - highly coupled system: a little change leads to lots of unpredictable results
 

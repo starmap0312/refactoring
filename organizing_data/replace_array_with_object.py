@@ -4,7 +4,7 @@
 # for each element
 # - an array should contain a collection of "similar" objects in some order, don't use them
 # to contain different things
-# - the advantage is that you can use Move Method to add behaviro to the new objects, and
+# - the advantage is that you can use Move Method to add behavior to the new objects, and
 # the code is easier to understand, with a better design
 
 # Use Array, representing different things
@@ -22,17 +22,17 @@ class Performance(object):
         self._name = None
         self._wins = None
 
-    def getName(self):
-        return self._name
-
     def setName(self, name):
         self._name = name
 
-    def getWins(self):
-        return int(self._wins)
+    def getName(self):
+        return self._name
 
     def setWins(self, wins):
         self._wins = wins
+
+    def getWins(self):
+        return int(self._wins)
 
 # client code
 row = Performance()

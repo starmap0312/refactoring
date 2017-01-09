@@ -4,7 +4,8 @@
 #       extracting area code, and conversion, etc.
 #   if there are only one or two data items, one can write methods in the owning class, but
 #   if the codes begins to smell, turn the data items into objects
-
+#
+# (before: use simple data type)
 class Order(object):
     # use simple data type, i.e. string
 
@@ -18,6 +19,7 @@ class Order(object):
     def setCustomerName(self, customerName):
         self._customer = customerName
 
+# (after: use object)
 class Customer(object):
     # later, realizes that simple data type (string) is not sufficient, and thus defines an object
     # can define more manipulating methods of the object
