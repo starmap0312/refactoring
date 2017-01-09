@@ -10,7 +10,7 @@ class Employee(object):
     def __init__(self, code):
         self._code = code
 
-    def payAmount(self): # conditional behavior based on the type code
+    def payAmount(self): # different behavior based on the type code
         if self._code == Employee.ENGINEER:
             return self._monthlySalary
         elif self._code == Employee.SALESMAN:
@@ -22,7 +22,7 @@ class Employee(object):
 
 # (after: use state/strategy)
 class EmployeeType(object):
-    # type class
+    # type-code class
 
     (ENGINEER, SALESMAN, MANAGER) = (0, 1, 2) # type code
 
@@ -85,7 +85,7 @@ class Employee(object):
     def payAmount(self):
         return self._type.payAmount()
 
-# client
+# client: replace type code with state/strategy
 engineer = EmployeeType.create(EmployeeType.ENGINEER)
 employee = Employee(engineer)
 print employee.payAmount()
