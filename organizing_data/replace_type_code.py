@@ -25,10 +25,10 @@ class BloodType(object):
     def O():
         return BloodType(3)
 
-print(BloodType.A().getCode())
-print(BloodType.B().getCode())
-print(BloodType.AB().getCode())
-print(BloodType.O().getCode())
+print BloodType.A().getCode()
+print BloodType.B().getCode()
+print BloodType.AB().getCode()
+print BloodType.O().getCode()
 
 # example 2: use static field
 class BloodType(object):

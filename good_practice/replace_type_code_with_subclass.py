@@ -1,5 +1,6 @@
-# replace type code with subclass: if an immutable type code affects class behavior 
+# replace type code with subclass: if type code affects class behavior 
 #   use sublcassing/polymorphism to handle the variant type-code related behavior
+#   (if type code does not affect class behavior, replace type code with class instead)
 # advantages
 #   1) move knowledage of variant behavior from client to type subclass
 #   2) easy to to add new variants (a new subclass): without polymorphism we need to change all the conditionals
