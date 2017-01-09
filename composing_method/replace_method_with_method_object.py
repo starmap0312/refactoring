@@ -2,8 +2,8 @@
 #   create a new class for the job
 # - turn a method into its own object, so that the temp variables become fields of the object
 #   the decomposition of the method will become easiler
-
-# before
+#
+# before: hard to decompose the method
 def delta():
     return 100
 
@@ -17,8 +17,8 @@ def gamma(inputValue, quantity, yearToDate):
     return value3 - 2 * value1
 
 print gamma(5, 10, 20)
-# after
 
+# after: easier to decompose the method
 class Gamma(object):
 
     def __init__(self, inputValue, quantity, yearToDate):

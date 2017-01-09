@@ -2,7 +2,6 @@
 
 # before
 def foundPerson(people):
-
     for i in range(len(people)):
         if people[i] == 'Don':
             return 'Don'
