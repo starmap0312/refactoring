@@ -1,27 +1,9 @@
-# - type code: a special value that indicates a type of instance, often shows up as enumerations
-#   or implemented as static final integers
-# - if the type code are for information and does not alter the behavior of the class, then 
-#   use replace type code with class to give you better type checking and a platform for moving
-#   behavior later
-#   if the type code affects the behavior of a class, then use replace type code by subclass if
-#   possible, otherwise use the more complicated (but more flexible) replace type code by state/
-#   strategy
-# - replace the type code with a class only if the type code is pure data, i.e. it does not
-#   cause different behavior inside a switch statement, because Java can only switch on an integer,
-#   not an arbitrary class; the switch has to be removed with replace conditional with polymorphism
-#   i.e. replace the type code with subclasses, or replace type code with state/strategy
-# - if a class has the numeric type code that does not affect its behavior, then replace the
-#   type code with a new class
-# - numeric type codes, or enumerations, are a common feature of C-based languages
-#   with symbolic names, they are quite readable
-#   however, the complier type checks using the number not the symbolic name, 
-#   any methods that take the type code as argument expect a number, and there's
-#   nothing to force the symbolic name to be used, which can reduce the readablity and 
-#   be a source of bugs
-# - if replace type code with class, the complier can type check on the class, and by providing
-#   factory method for the class, one can statically check that only valid instances are
-#   created and that those instances are passed on to the correct objects
-# - there might be behavior that is better placed in the type code class, i.e. use move method
+# type code: a type of instance, usually represented by enumerations or static final integers
+# 1) if type code does not alter class behavior, then replace type code with class 
+#    for better type checking and adding behavior later
+# 2) if the type code affects class behavior, then replace type code by subclass or by state/strategy
+#    different behaviors are placed in the type code class
+#    replace switch/conditional statement with polymorphism
 
 # (before: use type code)
 class Person(object):
@@ -64,6 +46,9 @@ class BloodType(object):
   @staticmethod
   def AB():
     return BloodType(0)
+
+# use factory methods in type class
+#   statically check that only valid instances are created 
 
 class Person(object):
 
