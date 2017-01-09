@@ -75,7 +75,6 @@ class Manager(EmployeeType):
 
 class Employee(object):
     # client class HAS_A type-code subclass object (state/strategy)
-    (ENGINEER, SALESMAN, MANAGER) = (Engineer(), Salesman(), Manager())
 
     def __init__(self, type):
         self._type = type
@@ -87,13 +86,15 @@ class Employee(object):
         return self._type.payAmount()
 
 # client
-employee = Employee(Employee.ENGINEER)
+engineer = EmployeeType.create(EmployeeType.ENGINEER)
+employee = Employee(engineer)
 print employee.payAmount()
-employee = Employee(Employee.MANAGER)
+manager = EmployeeType.create(EmployeeType.MANAGER)
+employee = Employee(manager)
 print employee.payAmount()
 
-# comparison: replace with subclass
-engineer = Engineer()
+# comparison: replace type code with subclass
+engineer = EmployeeType.create(EmployeeType.ENGINEER)
 print engineer.payAmount()
-manager = Manager()
+manager = EmployeeType.create(EmployeeType.MANAGER)
 print manager.payAmount()
