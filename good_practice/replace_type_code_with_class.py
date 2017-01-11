@@ -24,6 +24,7 @@ print person.getBloodCode()
 
 # (after: use class)
 class BloodType(object):
+  # type class
 
   def __init__(self, bloodCode):
       self._bloodCode = bloodCode
@@ -47,13 +48,14 @@ class BloodType(object):
   def AB():
     return BloodType(0)
 
-# use factory methods in type class
-#   statically check that only valid instances are created 
+# use static factory methods in type class to create type-class instances
+#   statical check for valid type-class instances
 
 class Person(object):
+    # client class
 
     def __init__(self, bloodType):
-        self._bloodType = bloodType
+        self._bloodType = bloodType # type-class instance
 
     def getBloodCode(self):
         return self._bloodType.getBloodCode()
@@ -62,10 +64,11 @@ class Person(object):
 person = Person(BloodType.O())
 print person.getBloodCode()
 # advantage
-# 1) enables type check: ex. person = Person(2), which will raise type exeception in Java 
+# 1) enables static check: ex. person = Person(2) will raise exeception in Java 
 
 # another example
 class EmployeeType(object):
+    # type class
 
     def __init__(self, code):
         self._code = code
@@ -74,6 +77,7 @@ class EmployeeType(object):
         return self._code
 
 class Employee(object):
+    # client class
 
     (ENGINEER, SALESMAN, MANAGER) = (EmployeeType(0), EmployeeType(1), EmployeeType(2))
 
@@ -83,7 +87,9 @@ class Employee(object):
     def getCode(self):
         return self._type.getCode()
 
+# use static fields in client class to create type-class instances
+
 employee = Employee(Employee.ENGINEER)
 print employee.getCode()
 # advantage
-# 1) enables type check: ex. employee = Employee(2), which will raise type exeception in Java 
+# 1) enables static type check: ex. employee = Employee(2) will raise exeception in Java 

@@ -1,13 +1,14 @@
-# replace type code with subclass: if type code affects class behavior 
+# if type code does not affect class behavior, replace type code with class
+# if type code affects class behavior, replace type code with subclass and move different behavior to type subclass
 #   use sublcassing/polymorphism to handle the variant type-code related behavior
-#   (if type code does not affect class behavior, replace type code with class instead)
-# advantages
+#   advantages:
 #   1) move knowledage of variant behavior from client to type subclass
-#   2) easy to to add new variants (a new subclass): without polymorphism we need to change all the conditionals
+#   2) easy to to add new variants (new subclasses)
+#      without polymorphism, we need to change all the conditionals
 
 # (after)
 class EmployeeType(object):
-    # type class has a type code
+    # type class
 
     (ENGINEER, SALESMAN, MANAGER) = (0, 1, 2) # type code
 
@@ -18,10 +19,10 @@ class EmployeeType(object):
         self._bonus = 300000        
 
     def getCode(self):
-        return self._code         # can be moved downwards to subclasses
+        return self._code         # define common behavior in superclass
 
     def payAmount(self):
-        raise NotImplementedError # imeplemented in subclasses
+        raise NotImplementedError # define different behaviors in subclasses
 
     @staticmethod
     def create(code):
@@ -45,6 +46,7 @@ class Engineer(EmployeeType):
         return self._monthlySalary
 
 class Salesman(EmployeeType):
+    # type-code subclass
 
     def __init__(self):
         super(Salesman, self).__init__()
@@ -54,6 +56,7 @@ class Salesman(EmployeeType):
         return self._monthlySalary + self._commission
 
 class Manager(EmployeeType):
+    # type-code subclass
 
     def __init__(self):
         super(Manager, self).__init__()
@@ -63,10 +66,11 @@ class Manager(EmployeeType):
         return self._monthlySalary + self._bonus
 
 # client
-engineer = EmployeeType.create(EmployeeType.ENGINEER)
+engineer = EmployeeType.create(EmployeeType.ENGINEER) # type-subclass instance
 print engineer.payAmount()
-manager = EmployeeType.create(EmployeeType.MANAGER)
+manager = EmployeeType.create(EmployeeType.MANAGER)   # type-subclass instance
 print manager.payAmount()
 # advantages
-# 1) decouple type related behavior from client 
-# 2) easy to create different type-code employees and behaviors
+# 1) decouple type-code related behavior from client 
+# 2) easy to create different type-code subclasses and behaviors
+
