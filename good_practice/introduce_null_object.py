@@ -1,5 +1,6 @@
-# - if you have repeated checks for a null value, then replace the null value with a null object
-# - if one of your conditional cases is a null, use introduce null object
+# don't use null
+#   if you have repeated checks for a null value, then replace the null value with a null object
+#   if one of your conditional cases is a null, use introduce null object
 
 # before: use conditionals
 class Customer(object):
@@ -20,5 +21,5 @@ class NullCustomer(Customer):
     def getPlan(self):
         doSomething()
 
-# simplified code: client uses polymorphism that is able to perform the null case
+# simplified client code: client uses polymorphism that is able to perform the null case
 plan = customer.getPlan()
