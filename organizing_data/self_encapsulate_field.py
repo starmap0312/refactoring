@@ -1,9 +1,12 @@
 # - debate: whether an object should access its own data directly or through accesors
 #   generally use direct access because it is simple to do refactoring
 # - within the class the variable is defined: access the variable freely vs. use accessors
-# - indirect access: allow subclass to overwrite how to get the information, and support 
-#   lazy initialization: initializes the value only when you need to use it
-#   direct access: the code is easier to read
+# comparison: direct vs. indirect access
+# 1) indirect access
+#    allow subclass to overwrite how to get the information
+#    support lazy initialization: i.e. initializes the value only when you need to use it
+# 2) direct access (bad design)
+#    the code is easier to read
 # - self encapsulate field: use getting and setting methods
 # - use direct access first, and switch to indirect access if necessary
 #   ex: when access a field in a superclass, but want to override the variable access with
