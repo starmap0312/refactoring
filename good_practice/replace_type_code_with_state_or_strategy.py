@@ -79,7 +79,7 @@ class Manager(EmployeeType):
         return self._monthlySalary + self._bonus
 
 class Employee(object):
-    # client class HAS_A type-subclass instance (state/strategy)
+    # client/wrapper class (decorator): HAS_A type-subclass instance (state/strategy)
 
     def __init__(self, type):
         self._type = type
