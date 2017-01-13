@@ -1,18 +1,20 @@
-# - when two classes have similar features, you can create a superclass and move the common
-#   features to the superclass(common behaviors, common code) 
-#   in contrast, extract interface only when there are no common code(behavior)
+# - when two classes have similar features
+#     extract superclass and move the common features to the superclass(common behaviors/code) 
+# - in contrast, if there are no common code (behavior)
+#     extract interface
 # - often you don't notice the common parts when creating some classes, in which case you need
 #   to extract the common parts into a superclass later
 # - "extract superclass + inheritance" vs. "extract class + delegation"
-# - use "extract superclass + inheritance" if the two classes share same "interface" and "behavior"
-#   and you feel that inheritance is a good choice
-# - use "extract class + delegation" if subclass uses only part of superclass interface, or
-#   subclass does not want to inherit data, or many of superclass operations do not make sense 
-#   for sublcass
-# - in convention, subclass should use all superclass's methods, use delegation if you only
-#   make partial use of the delegated class(the cost is extra delegating methods)
-# - "replace inheritance with delegation" or "replace delegation with inheritance" if make the
-#   wrong choice and want to switch to the other option
+# - use "extract superclass + inheritance" if 
+#   two classes share same "interface" and "behavior" and you feel that inheritance is a good choice
+# - use "extract class + delegation" if
+#   1) subclass uses only part of superclass interface, or
+#   2) subclass does not want to inherit data
+#   3) many of superclass operations do not make sense for sublcass
+# - use "extract superclass + inheritance" if you want to use all superclass's methods
+#   use "extract class + delegation" if you make partial use of the delegated class (the cost is extra delegating methods)
+# - "replace inheritance with delegation" or "replace delegation with inheritance" if
+#   make the wrong choice and want to switch to the other option
 
 # before
 class Employee(object):
@@ -57,7 +59,7 @@ cs.addStaff(john)
 cs.addStaff(tom)
 print cs.getName(), cs.getAnnualCost()
 
-# after
+# after: extract superclass + inheritance
 class Party(object):
     # common interface and behavior are extracted into the superclass, inheritance are
     # then applied
