@@ -1,56 +1,55 @@
-# - if there are delegations for the entire interface, then make the delegating class a
-#   subclass of the delegate
-# - a subclass should use all the methods of superclass and follow the interface of the
-#   superclass
-# - client -> server -> delegate: this is used when you create too many delegating methods 
-#   at the server class, and later figure out that making the server class a subclass of the
-#   the delegate class is a better choice
+# - if there are delegations for the entire interface
+#   if a subclass use all methods of superclass and follow superclass interface
+#     replace the delegating class with a subclass of the delegate
+# - delegation
+#     client -> wrapper -> delegate    (client is decoupled from the delegate)
+#     advantage: easy to compose 
+#     disadvantage: extra complexity, creating delegating methods 
+# - inheritance
+#     client -> subclass -> superclass (client is coupled to subclass)
+#     advantage: reduced complexity, easy to extend by subclassing
+#     drawback: creates coupling between subclasses
 
-# before
+# (before: use delegation)
 class Person(object):
+    # the delegate
 
-    def setName(self, name):
+    def __init__(self, name):
         self._name = name
 
     def getName(self):
         return self._name
 
 class Employee(object):
+    # a wrapper class (decorator)
 
-    def __init__(self):
-        self._person = Person() # the delegate object
-
-    def setName(self, name):
-        # a delegating method
-        self._person.setName(name)
-
-    def getName(self):
-        # a delegating method
-        return self._person.getName()
-
-    def setTitle(self, title):
+    def __init__(self, name, title):
+        self._person = Person(name) # the delegate object
         self._title = title
 
-    def getTitle(self):
+    def getName(self):              # a delegating method
+        return self._person.getName()
+
+    def getTitle(self):             # an additional method
         return self._title
 
 # client
-employee = Employee()
-employee.setName('John')
-employee.setTitle('Senior Engineer')
+employee = Employee('John', 'Senior Engineer')
 print employee.getName(), employee.getTitle()
 
-# after: as the server class behaves similarly to the delegate class , we use inheritance instead
+# if wrapper class behaves similarly to the delegate class , use inheritance instead
+# (after: replace delegation with inheritance)
 class Employee(Person):
-    # the server class is a subclass of the delegate class, so it becomes easier to extend
-    # the behaviors without chasing all the delegation, but the limitation is that you cannot
-    # switch to other delegate object at run time
+    # a subclass: easier to extend
 
     def setTitle(self, title):
         self._title = title
 
     def getTitle(self):
         return self._title
+
+# advantage: no need to chase all the delegation
+# disadvantage: you cannot switch to other delegate object at run time
 
 # client
 employee = Employee()

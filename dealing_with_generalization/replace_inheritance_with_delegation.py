@@ -1,20 +1,13 @@
-# - when a subclass uses only part of a superclass's interface or does not want to inherit data,
-#   then remove subclassing and use delegation instead
-#   in this case, use subclassing will cause confusion to the reader
-# - you may start with using subclassing first, but later find that the subclass does not want
-#   many of the superclass's operations. in this case, the superclass's interface is not a
-#   true reflection of what the subclass does, and can cause confusion to the reader
-# - or you may find that the subclass is inheriting a whole load of data that is not appropriate
-#   for the subclass(or do not make sense in the subclass), then remove subclassing and use
-#   delegation
-# - but often, it is OK that a subclass uses only part of the superclass's data and behaviors,
+# - if subclass uses only part of superclass interface
+#   if subclass does not want to inherit data
+#     inheritance is not the natural relationship (will cause confusion to the reader)
+#     so replace inheritance with delegation
+# - sometimes, it is OK that subclass uses only part of superclass's data and behaviors,
 #   as long as this does not cause confusion
-# - using delegation means that you're making use of only part of the delegated class, thus no
-#   confusion at all; but the overhead is the adding of delegating methods
-#   using delegation you can control what aspects of the interface to use and what to ignore
 
-# before: subclassing
+# (before: use inheritance)
 class Vector(object):
+    # superclass
 
     def __init__(self):
         self._vector = []
@@ -34,11 +27,12 @@ class Vector(object):
         return element
 
 class Stack(Vector):
+    # subclass
 
-    def push(self, element):
+    def push(self, element): # additional (extended) behavior
         self.append(element)
 
-    def pop(self):
+    def pop(self):           # additional (extended) behavior
         result = self.remove(self.size()-1)
         return result
 
@@ -48,25 +42,27 @@ stack.push(2)
 stack.push(3)
 print stack.pop(), stack.pop(), stack.pop()
 
-# after: remove inheritance and use delegation
-class NewStack(object):
+# when subclass does not use all the methods of superclass
+# (after: replace inheritance with delegation)
+class Stack(object):
+    # wrapper class
 
     def __init__(self):
-        self._vector = Vector()
+        self._vector = Vector() # the delegate object
 
-    def push(self, element):
+    def push(self, element):    # additional (extended) behavior
         self._vector.append(element)
 
-    def pop(self):
+    def pop(self):              # additional (extended) behavior
         return self._vector.remove(self.size()-1)
 
-    def isEmpty(self):
+    def isEmpty(self):          # a delegating method
         return self._vector.isEmpty()
 
-    def size(self):
+    def size(self):             # a delegating method
         return self._vector.size()
 
-stack = NewStack()
+stack = Stack()
 stack.push(1)
 stack.push(2)
 stack.push(3)
