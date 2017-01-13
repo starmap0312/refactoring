@@ -41,19 +41,15 @@ class Statement(object):
     # extracted class, different format methods are implemented in subclasses
 
     def headerString(self, customer):
-        # different implementation in subclass
-        raise NotImplementedError
+        raise NotImplementedError # different implementation in subclass
 
     def rentalString(self, item):
-        # different implementation in subclass
-        raise NotImplementedError
+        raise NotImplementedError # different implementation in subclass
 
     def footerString(self, customer):
-        # different implementation in subclass
-        raise NotImplementedError
+        raise NotImplementedError # different implementation in subclass
 
-    def value(self, customer):
-        # template method: the skeleton of the method(same code structure)
+    def value(self, customer):    # template method: skeleton of the method (same code structure)
         result = self.headerString(customer)
         for item in customer.rentals:
             result += self.rentalString(item)
@@ -84,7 +80,7 @@ class HtmlStatement(Statement):
     def footerString(self, customer):
         return '<P>The total charge is %s</P>' % customer.totalCharge
 
-class NewCustomer(object):
+class Customer(object):
     # the client class that holds data and that has methods using delegation
 
     def __init__(self):
@@ -98,6 +94,6 @@ class NewCustomer(object):
     def htmlStatement(self):
         return HtmlStatement().value(self)
 
-customer = NewCustomer()
+customer = Customer()
 print customer.textStatement()
 print customer.htmlStatement()
