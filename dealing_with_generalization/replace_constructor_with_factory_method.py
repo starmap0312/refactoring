@@ -6,54 +6,63 @@ class Employee(object):
 
     (ENGINEER, SALESMAN, MANAGER) = (0, 1, 2)
 
-    def __init__(self, type):
-        self._type = type
+    def __init__(self, code):
+        self._code = code
+
+    def getCode(self):
+        return self._code
 
     @staticmethod
-    def create(type):
+    def create(code):
         # a factory method
-        return Employee(type)
+        return Employee(code)
 
-# client code uses factory method
+# client code uses factory method (simple factory)
 employee = Employee.create(Employee.MANAGER)
-print employee._type
+print employee.getCode()
 
 # further example: when the type codes are replaced with subclasses
 # use factory method can separate the client from the class of object created (i.e. subclasses)
 
-class NewEmployee(object):
+class Employee(object):
 
     (ENGINEER, SALESMAN, MANAGER) = (0, 1, 2)
 
+    def getCode(self):
+        return self._code
+
     @staticmethod
-    def create(type):
+    def create(code):
         # a switch case here, if add new type code subclass, need to modify here as well
         # if the subclasses do not change, you can create an explict factory method for 
         # each subclasses
-        if type == NewEmployee.ENGINEER:
+        if code == Employee.ENGINEER:
             return Engineer()
-        elif type == NewEmployee.SALESMAN:
+        elif code == Employee.SALESMAN:
             return Salesman()
-        elif type == NewEmployee.MANAGER:
+        elif code == Employee.MANAGER:
             return Manager()
         else:
             raise Exception('Incorrect type code')
 
-class Engineer(NewEmployee):
+class Engineer(Employee):
+    # type-code class
 
     def __init__(self):
-        self._type = NewEmployee.ENGINEER
+        self._code = Employee.ENGINEER
 
-class Salesman(NewEmployee):
-
-    def __init__(self):
-        self._type = NewEmployee.SALESMAN
-
-class Manager(NewEmployee):
+class Salesman(Employee):
+    # type-code class
 
     def __init__(self):
-        self._type = NewEmployee.MANAGER
+        self._code = Employee.SALESMAN
+
+class Manager(Employee):
+    # type-code class
+
+    def __init__(self):
+        self._code = Employee.MANAGER
 
 # client code: hide the subclasses from the client
-employee = NewEmployee.create(NewEmployee.MANAGER)
-print employee._type
+employee = Employee.create(Employee.MANAGER)
+print employee.getCode()
