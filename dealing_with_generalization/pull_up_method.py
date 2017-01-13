@@ -1,7 +1,8 @@
-# - have two methods with similar behaviors on subclasses. move them to the superclass
-# - the two methods may need to be parameterized so that they end up as the same methods
-# - if the two methods refer to features that are on subclass, either generalize the referred
-#   method as well, or create an abstract method in the superclass
+# - if two methods with similar behaviors on subclasses. pull them up to superclass
+# - the two methods may need to be parameterized so that they end up as an identical method
+# - if the two methods refer to features that are in subclasses
+#   1) generalize the referred method as well, or
+#   2) create an abstract method in the superclass
 
 # before
 class Customer(object):
@@ -41,7 +42,7 @@ preferred.createBill()
 print preferred.getBill()
 
 # after
-class NewCustomer(object):
+class Customer(object):
 
     def __init__(self):
         self.bill = None
@@ -57,15 +58,14 @@ class NewCustomer(object):
         self.addBill(amount)
 
     def chargeFor(self):
-        # create an abstract method in superclass
-        raise NotImplementedError
+        raise NotImplementedError # create an abstract method in superclass
 
-class RegularCustomer(NewCustomer):
+class RegularCustomer(Customer):
 
     def chargeFor(self):
         return 100
 
-class PreferredCustomer(NewCustomer):
+class PreferredCustomer(Customer):
 
     def chargeFor(self):
         return 200
