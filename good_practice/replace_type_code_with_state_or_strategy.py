@@ -37,8 +37,9 @@ class EmployeeType(object):
     def payAmount(self):
         raise NotImplementedError # define different behaviors in subclasses
 
+    # option 1: use parameterized factory method if type-code changes very often
     @staticmethod
-    def create(code):
+    def create(code):             # define static factory method to decouple client from instances of type-code subclasses
         if code == EmployeeType.ENGINEER:
             return Engineer()
         elif code == EmployeeType.SALESMAN:
@@ -47,6 +48,15 @@ class EmployeeType(object):
             return Manager()
         else:
             raise Exception('Incorrect Employee Type')
+
+    # option 2: use explicit method if type-code does not change often (more descriptive, less extensible)
+    @staticmethod
+    def create_engineer():
+        return Engineer()
+
+    @staticmethod
+    def create_manager():
+        return Manager()
 
 class Engineer(EmployeeType):
     # type-code subclass
@@ -80,15 +90,16 @@ class Manager(EmployeeType):
 
 class Employee(object):
     # client/wrapper class (decorator): HAS_A type-subclass instance (state/strategy)
+    # this decouples client from implementation of type-code subclasses
 
     def __init__(self, type):
         self._type = type
 
-    def getCode(self):
+    def getCode(self):                # a delegating method
         return self._type.getCode()
 
     def payAmount(self):
-        return self._type.payAmount()
+        return self._type.payAmount() # a delegating method
 
 # client: replace type code with state/strategy
 engineer = EmployeeType.create(EmployeeType.ENGINEER)
@@ -97,8 +108,8 @@ print employee.payAmount()
 manager = EmployeeType.create(EmployeeType.MANAGER)
 employee = Employee(manager)
 print employee.payAmount()
-# advantage: client are decoupled from type-subclass instances
-#            when type subclass changes, client code is not affected
+# advantage: client are decoupled from type-subclass implementations 
+#            when type-subclass changes, only wrapper class is affected (client code is not affected)
 
 # client: comparison with replace type code with subclass
 engineer = EmployeeType.create(EmployeeType.ENGINEER)

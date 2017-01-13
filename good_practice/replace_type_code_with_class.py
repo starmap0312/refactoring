@@ -22,7 +22,7 @@ print person.getBloodCode()
 # 1) no type checks: ex. person = Person(2)
 # 2) the type code is mixed with the client class, thus limiting its extension
 
-# (after: use class)
+# (after: create type-class)
 class BloodType(object):
   # type class
 
@@ -32,6 +32,13 @@ class BloodType(object):
   def getBloodCode(self):
     return self._bloodCode
 
+  # factory method: single-entry point for creating type-code instances
+  # option 1: use parameterized factory method (more extensible, less descriptive)
+  @staticmethod
+  def create(bloodCode):
+      return BloodType(bloodCode)
+
+  # option 2: use explict factory method (more descriptive, less extensible)
   @staticmethod
   def O():
     return BloodType(0)

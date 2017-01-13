@@ -24,6 +24,7 @@ class EmployeeType(object):
     def payAmount(self):
         raise NotImplementedError # define different behaviors in subclasses
 
+    # option 1: use parameterized factory method
     @staticmethod
     def create(code):
         if code == EmployeeType.ENGINEER:
@@ -34,6 +35,11 @@ class EmployeeType(object):
             return Manager()
         else:
             raise Exception('Incorrect type code')
+
+    # option 2: use explict factory method
+    @staticmethod
+    def create_engineer():
+        return Engineer()
 
 class Engineer(EmployeeType):
     # type-code subclass

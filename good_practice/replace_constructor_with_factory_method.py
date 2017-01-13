@@ -14,7 +14,7 @@ class Employee(object):
         return self._code
 
     @staticmethod
-    def create(code):         # a static factory method that replaces constructor
+    def create(code):         # a static factory method can do more things, ex. validation 
         return Employee(code)
 
 # client
@@ -36,7 +36,7 @@ class Employee(object):
 
     # option 1: use switch statement if the type code changes often
     @staticmethod
-    def create(code):          # a parameterized factory method
+    def create(code):          # a parameterized factory method which can do more things, ex. switch statement
         if code == Employee.ENGINEER:
             return Engineer()
         elif code == Employee.SALESMAN:
@@ -79,7 +79,7 @@ class Manager(Employee):
     def __init__(self):
         self._code = Employee.MANAGER
 
-# client: hide the created instances of subclasses from the client
+# client: hide instances of type-code subclasses from the client
 # (before)
 employee = Manager()
 print employee.getCode()
