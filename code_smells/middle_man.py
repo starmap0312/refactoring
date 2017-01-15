@@ -1,13 +1,21 @@
-# - you use hide delegate to hide the details of the delegate from the client(thus removing
-#   the dependency of the client and the delegate): client -> server -> delegate
-# - encapsulation: hide internal details from the rest of the world, so that it becomes easier
-#   to make changes to the delegate 
-# - however, use hide delegate will create middle man, and the overhead is the created
-#   delegating methods(server class has delegating methods)
-# - remove middle man: when the server class has half of its methods delegating to the delegate 
-#   class, then the client can choose to talk to the delegate object directly
-# - inline method: if a delegate object's method isn't doing much, then you may inline the method 
-#   into the server/client class(reduce the number of delegating methods)
-# - replace delegation with inheritance: when the server class behaves similarly to the
-#   delegate class, you can use inheritance instead(make the server class a subclass of the 
-#   delegate class). this allows you to extend behaviors without chasing all the delegations.
+# - hide delegate / encapsulation
+#   pros:
+#         client -> wrapper -> delegate
+#         decouples client from delegate, hide the details of delegate from client
+#         hide internal details from rest of the world, so it becomes easier to make changes to delegate 
+#   cons:
+#         create middle man, additional delegating methods (wrapper class has delegating methods)
+# - remove middle man (wrapper)
+#   when wrapper class has half of its methods delegating to delegate class
+#   client can choose to talk to the delegate object directly
+# - replace delegation with inheritance
+#   when wrapper class behaves similarly to the delegate class
+#   replace delegation with inheritance (make the wrapper class a subclass of the delegate class)
+#   pros:
+#     easily extend behaviors without chasing all the delegations (add a subclass)
+#   cons:
+#     client is coupled to subclasses
+#     subclasses are coupled together due to inheritance
+# - inline method
+#   if delegate object's method isn't doing much, then inline the method into the wrapper/client class
+#   this reduces the number of delegating methods
