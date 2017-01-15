@@ -1,5 +1,5 @@
-# if type code that affects class behavior: replace type code with state/strategy
-#   if there is a reason that prevents subclassing
+# if type code that affects class behavior
+#   replace type code with state/strategy if there is a reason that prevents subclassing
 
 # (before: use type code)
 class Employee(object):
@@ -32,14 +32,14 @@ class EmployeeType(object):
         self._bonus = 300000
 
     def getCode(self):
-        return self._code         # define common behavior in superclass
+        return self._code  # define common behavior in superclass
 
-    def payAmount(self):
-        raise NotImplementedError # define different behaviors in subclasses
+    def payAmount(self):   # define different behaviors in subclasses
+        raise NotImplementedError
 
     # option 1: use parameterized factory method if type-code changes very often
     @staticmethod
-    def create(code):             # define static factory method to decouple client from instances of type-code subclasses
+    def create(code):      # define static factory method to decouple client from instances of type-code subclasses
         if code == EmployeeType.ENGINEER:
             return Engineer()
         elif code == EmployeeType.SALESMAN:
@@ -89,8 +89,7 @@ class Manager(EmployeeType):
         return self._monthlySalary + self._bonus
 
 class Employee(object):
-    # client/wrapper class (decorator): HAS_A type-subclass instance (state/strategy)
-    # this decouples client from implementation of type-code subclasses
+    # wrapper class HAS_A type-subclass instance (state/strategy)
 
     def __init__(self, type):
         self._type = type
@@ -101,19 +100,17 @@ class Employee(object):
     def payAmount(self):
         return self._type.payAmount() # a delegating method
 
-# client: replace type code with state/strategy
-engineer = EmployeeType.create(EmployeeType.ENGINEER)
-employee = Employee(engineer)
+# client: replace type code with state/strategy (decouples client from instances of type-code subclasses)
+#         decouple client from type-subclass instances 
+employee = Employee(EmployeeType.create(EmployeeType.ENGINEER))
 print employee.payAmount()
-manager = EmployeeType.create(EmployeeType.MANAGER)
-employee = Employee(manager)
+employee = Employee(EmployeeType.create(EmployeeType.MANAGER))
 print employee.payAmount()
-# advantage: client are decoupled from type-subclass implementations 
-#            when type-subclass changes, only wrapper class is affected (client code is not affected)
 
 # client: comparison with replace type code with subclass
+#         client are tightly coupled to type-subclass instances
 engineer = EmployeeType.create(EmployeeType.ENGINEER)
 print engineer.payAmount()
 manager = EmployeeType.create(EmployeeType.MANAGER)
 print manager.payAmount()
-# disadvantage: client are tightly coupled to type-subclass instances
+
