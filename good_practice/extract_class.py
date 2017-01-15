@@ -77,13 +77,13 @@ class Employee(Party):
 
     def __init__(self, name, annualCost):
         super(Employee, self).__init__(name)
-        self._annualCost = annualCost
+        self._annualCost = annualCost # different feature
 
-    def getAnnualCost(self):       # common behavior with different implementation
+    def getAnnualCost(self):          # common behavior with different implementation
         return self._annualCost
 
 class Department(Party):
-    # subclass
+    # wrapper class
 
     def __init__(self, name, employees):
         super(Department, self).__init__(name)
@@ -170,20 +170,46 @@ class Password(object):
     class Database(object):
         # wrapper class
 
-        def __init__(self):
+        def __init__(self):                               # encapsulation: hide details from client
             self._passwd = Password('dbuser', 'dbpass')   # do not want to inherit data/features
 
-        def keypair(self):                                # extra delegating method
+        def keypair(self):                                # a delegating method
             return self._passwd.keypair()
 
-    class WebServer(object):
+    class Website(object):
         # wrapper class
 
-        def __init__(self):
+        def __init__(self):                               # encapsulation: hide details from client
             self._passwd = Password('webuser', 'webpass') # do not want to inherit data/features
 
-        def keypair(self):                                # extra delegating method
+        def keypair(self):                                # a delegating method
             return self._passwd.keypair()
 
+# client
 print Password.Database().keypair()
-print Password.WebServer().keypair()
+print Password.Website().keypair()
+
+# example: III) extract superclass + inheritance (explict subclasses) 
+class Password(object):
+    # superclass
+
+    def keypair(self):
+        return '{0}/{1}'.format(self._keyname, self._value)
+
+    class Database(Password):
+        # explict subclass
+
+        def __init__(self):
+            self._keyname = 'dbuser'
+            self._value = 'dbpass'
+
+    class Website(Password):
+        # explict subclass
+
+        def __init__(self):
+            self._keyname = 'webuser'
+            self._value = 'webpass'
+
+# client
+print Password.Database().keypair()
+print Password.Website().keypair()
