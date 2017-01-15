@@ -1,10 +1,13 @@
 # - turn the procedural code into object-oriented code
-# - when you have code written in a procedural style, then turn the data records into objects
-#   (data class), break up the behavior, and move the behavior into the object(move method)
-# - typical situation: 1. long procedural methods on a class with little data 2. dumb data objects
-#   with nothing more than accessors
+# - when you have code written in a procedural style
+#   turn the data records into objects (data class)
+#   break up the behavior
+#   move the behavior into the object (move method)
+# - typical situation
+#   1) long procedural methods on a class with little data
+#   2) dumb data objects with nothing more than accessors
 # - it is OK to have objects with little or no data, but that usually happens in strategy objects
-#   with which we can vary behaviors(such procedural objects are usually small)
+#   with which we can vary behaviors
 
 # before: procedural code with procedures that operate on the data records
 def getPrice(order):

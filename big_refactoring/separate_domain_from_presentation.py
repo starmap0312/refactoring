@@ -9,8 +9,8 @@
 # - client-server GUIs use a logical two-tier design: the data in the database and the logic
 #   in the presentation classes
 # - separate the domain logic
-#   1. move the domain logic fields into the domain class(move fields)
-#   2. move the database logic(ex. SQL calls) to the domain class(extract method and move method)
+#   1) move the domain logic fields into the domain class(move fields)
+#   2) move the database logic(ex. SQL calls) to the domain class(extract method and move method)
 # - the presentation(view) class HAS_A a domain logic object
 
 # example

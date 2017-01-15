@@ -9,10 +9,10 @@
 # dual -> job1 variation(subclass) -> job2 variation(subclass)
 #      -> job1 variation(subclass) -> job2 variation(subclass)
 # as two jobs are mixed in the hierarchy,
-# 1. the code is hard to understand: the hierarchy does not produce one result, but two kinds of
+# 1) the code is hard to understand: the hierarchy does not produce one result, but two kinds of
 #    results
-# 2. code duplication: you may write the same job2 code in the hierarchy
-# 3. the code is hard to change: if you want to add subclasses for job2, you need to change
+# 2) code duplication: you may write the same job2 code in the hierarchy
+# 3) the code is hard to change: if you want to add subclasses for job2, you need to change
 #    many places as job2 subclasses are spread around in the hierarchy
 
 # better design:

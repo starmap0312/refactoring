@@ -31,14 +31,13 @@ class BillingScheme(object):
 # you may need to repeatedly refactor the code to separate the varying code from the code that 
 # stays the same first, using extract method and decompose conditional
 class BillingScheme(object):
-    # a superclass: use replace constructor with factory method
+    # superclass
 
     def createBill(self, customer):
-        # implemented in subclasses
         raise NotImplementedError
 
     @staticmehod
-    def createBillingScheme(typeCode):
+    def createBillingScheme(typeCode): # replace constructor with factory method
         if typeCode == 'Bussiness':
             return BusinessBillingScheme()
         elif typeCode == 'Residential':
@@ -47,16 +46,19 @@ class BillingScheme(object):
             return DisabilityBillingScheme()
 
 class BusinessBillingScheme(BillingScheme):
+    # subclass
 
     def createBill(self, customer):
         create_bussiness_bill()
 
 class ResidentialBillingScheme(BillingScheme):
+    # subclass
 
     def createBill(self, customer):
         create_residential_bill()
 
 class DisabilityBillingScheme(BillingScheme):
+    # subclass
 
     def createBill(self, customer):
         create_disability_bill()

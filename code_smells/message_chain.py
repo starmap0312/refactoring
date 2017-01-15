@@ -1,8 +1,7 @@
-# - when a client asks one object for another object, which asks for yet another
+# - when a client asks one object for another object, which asks for yet another object
 # - remove dependency by using hide delegate in the message chain
 
-# client
-# message chain: you may see a sequnece of getter methods
+# (before: message chain, you may see a sequnece of getter methods)
 
 class Person(object):
 
@@ -35,9 +34,9 @@ john = Person(Department(School('NTU')))
 # client -> Person 
 #        -> Department
 #        -> School
-print john.getDepartment().getSchool().getName() # get the school name
+print john.getDepartment().getSchool().getName() # get the school name via message chain
 
-# use hide delegate to reduce the dependency
+# (after: use hide delegate to reduce the dependency)
 # ex. define the delegating method getName() in class Department
 class Department(object):
 

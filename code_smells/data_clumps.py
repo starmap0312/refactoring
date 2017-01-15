@@ -1,6 +1,6 @@
-# - group related data items together: if you see some data items together in many places:
-#   ex. fields in a couple of classes, or parameters in many methods, make them into their own
-#   object
+# - group related data items together
+#   if you see some data items together in many places:
+#   ex. fields in a couple of classes, or parameters in many methods, make them into their own object
 # - use extract class to pull out the related fields into an object, this reduces the field list
 #   then apply introduce parameter object or preserve whole object to reduce the parameter list 
 #   size of methods
