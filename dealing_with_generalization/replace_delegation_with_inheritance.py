@@ -9,6 +9,11 @@
 #     client -> subclass -> superclass (client is coupled to subclass)
 #     advantage: reduced complexity, easy to extend by subclassing
 #     drawback: creates coupling between subclasses
+# - replace inheritance with delegation
+#   when a class (client) needs to use another class (delegate) but wants more control over its interface
+#   expose a set of routines in the wrapper that will provide a cohesive abstraction of the delegate
+# - replace delegation with inheritance
+#   when a class exposes every public routine of a delegate class, inherit from the delegate class instead of just using the class
 
 # (before: use delegation)
 class Person(object):

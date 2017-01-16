@@ -4,6 +4,11 @@
 #     so replace inheritance with delegation
 # - sometimes, it is OK that subclass uses only part of superclass's data and behaviors,
 #   as long as this does not cause confusion
+# - replace inheritance with delegation
+#   when a class (client) needs to use another class (delegate) but wants more control over its interface
+#   expose a set of routines in the wrapper that will provide a cohesive abstraction of the delegate
+# - replace delegation with inheritance
+#   when a class exposes every public routine of a delegate class, inherit from the delegate class instead of just using the class
 
 # (before: use inheritance)
 class Vector(object):

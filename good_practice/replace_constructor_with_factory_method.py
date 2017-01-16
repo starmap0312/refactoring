@@ -1,5 +1,7 @@
 # replace the constructor with a factory method
 #   do more than "simple construction" when creating an object  
+#   ex. need to create objects based on a type code
+#   ex. want to work with reference objects (objects reference to a single complex object) rather than value objects (small, indivisual objects)
 
 # example 1: replace type code with class
 class Employee(object):

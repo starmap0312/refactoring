@@ -1,6 +1,11 @@
 # - encapsulation: hide delegate from client
-#   client -> server -> delegate
+#   client -> wrapper -> delegate
 #   decouple client and delegate: client need not to change accordingly when delegate changes
+# - replace inheritance with delegation
+#   when a class (client) needs to use another class (delegate) but wants more control over its interface
+#   expose a set of routines in the wrapper that will provide a cohesive abstraction of the delegate
+# - replace delegation with inheritance
+#   when a class exposes every public routine of a delegate class, inherit from the delegate class instead of just using the class
 #
 # before: tight coupling between client and delegate
 class Person(object):
