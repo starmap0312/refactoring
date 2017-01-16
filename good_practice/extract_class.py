@@ -189,26 +189,24 @@ class Password(object):
 print Password.Database().keypair()
 print Password.Website().keypair()
 
-# example: III) extract superclass + inheritance (explict subclasses) 
+# example: III) extract superclass + inheritance (create explict subclasses if code does not change often)
 class Password(object):
     # superclass
 
     def keypair(self):
-        return '{0}/{1}'.format(self._keyname, self._value)
+        raise NotImplementedError
 
-    class Database(Password):
+    class Database(object):
         # explict subclass
 
-        def __init__(self):
-            self._keyname = 'dbuser'
-            self._value = 'dbpass'
+        def keypair(self):
+            return '{0}/{1}'.format('dbuser', 'dbpass')
 
-    class Website(Password):
+    class Website(object):
         # explict subclass
 
-        def __init__(self):
-            self._keyname = 'webuser'
-            self._value = 'webpass'
+        def keypair(self):
+            return '{0}/{1}'.format('webuser', 'webpass')
 
 # client
 print Password.Database().keypair()
